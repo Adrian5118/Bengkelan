@@ -62,6 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                 const Text("Password"),
                 Expanded(
                   child: TextFormField(
+                    obscureText: true,
                     controller: _passwordController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -117,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                               return;
                             }
 
-                            Navigator.of(context).pushNamed(
+                            Navigator.of(context).pushReplacementNamed(
                               "/dashboard",
                               arguments: {"userId": credId},
                             );

@@ -18,6 +18,8 @@ class _DashboardPageState extends State<DashboardPage> {
 
   List<TableRow> _inProgressCarsRow = [];
 
+  int _currentPageIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     var arg = ModalRoute.of(context)!.settings.arguments as Map<String, int?>;
@@ -31,8 +33,9 @@ class _DashboardPageState extends State<DashboardPage> {
     _getInProgressCars().then((list) async {
       await _getCarServiceStatusCount();
 
-      _inProgressCarsRow = list;
-      setState(() {});
+      setState(() {
+        _inProgressCarsRow = list;
+      });
       await Future.delayed(Duration(seconds: 5));
     });
 
@@ -47,144 +50,203 @@ class _DashboardPageState extends State<DashboardPage> {
       ),
       body: Padding(
         padding: EdgeInsetsGeometry.symmetric(vertical: 40, horizontal: 20),
-        child: Column(
-          children: [
-            const Text(
-              "Your Cars",
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.w400),
-            ),
-            Expanded(
-              flex: 2,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsetsGeometry.symmetric(horizontal: 8),
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.of(
-                            context,
-                          ).pushNamed("/list", arguments: {"status": "Queued"});
-                        },
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.symmetric(horizontal: 8),
-                          minimumSize: Size.zero,
-                          backgroundColor: Colors.yellow,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.zero),
-                          ),
-                        ),
-                        child: Column(
-                          children: [
-                            const Text(
-                              "Queued",
-                              style: TextStyle(fontWeight: FontWeight.w600),
-                            ),
-                            Text(
-                              "${_carServiceStatusCount["Queued"]}",
-                              style: TextStyle(
-                                fontSize: 32,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsetsGeometry.symmetric(horizontal: 8),
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pushNamed(
-                            "/list",
-                            arguments: {"status": "Working"},
-                          );
-                        },
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.symmetric(horizontal: 8),
-                          minimumSize: Size.zero,
-                          backgroundColor: Colors.lightBlue,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.zero),
-                          ),
-                        ),
-                        child: Column(
-                          children: [
-                            const Text(
-                              "In Progress",
-                              style: TextStyle(fontWeight: FontWeight.w600),
-                            ),
-                            Text(
-                              "${_carServiceStatusCount["Working"]}",
-                              style: TextStyle(
-                                fontSize: 32,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsetsGeometry.symmetric(horizontal: 8),
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pushNamed(
-                            "/list",
-                            arguments: {"status": "Finished"},
-                          );
-                        },
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.symmetric(horizontal: 8),
-                          minimumSize: Size.zero,
-                          backgroundColor: Colors.lightGreen,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.zero),
-                          ),
-                        ),
-                        child: Column(
-                          children: [
-                            const Text(
-                              "Done",
-                              style: TextStyle(fontWeight: FontWeight.w600),
-                            ),
-                            Text(
-                              "${_carServiceStatusCount["Finished"]}",
-                              style: TextStyle(
-                                fontSize: 32,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+        child: <Widget>[
+          Column(
+            // Main
+            children: [
+              const Text(
+                "Your Cars",
+                style: TextStyle(fontSize: 32, fontWeight: FontWeight.w400),
               ),
-            ),
-            const Text(
-              "Cars in Service",
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.w400),
-            ),
-            Expanded(
-              flex: 13,
-              child: Table(
-                border: TableBorder.all(),
-                columnWidths: {
-                  0: FlexColumnWidth(3),
-                  1: FlexColumnWidth(30),
-                  2: FlexColumnWidth(4),
+              Expanded(
+                flex: 2,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsetsGeometry.symmetric(horizontal: 8),
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pushNamed(
+                              "/list",
+                              arguments: {
+                                "status": "Queued",
+                                "userId": _userId,
+                              },
+                            );
+                          },
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.symmetric(horizontal: 8),
+                            minimumSize: Size.zero,
+                            backgroundColor: Colors.yellow,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.zero),
+                            ),
+                          ),
+                          child: Column(
+                            children: [
+                              const Text(
+                                "Queued",
+                                style: TextStyle(fontWeight: FontWeight.w600),
+                              ),
+                              Text(
+                                "${_carServiceStatusCount["Queued"]}",
+                                style: TextStyle(
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsetsGeometry.symmetric(horizontal: 8),
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pushNamed(
+                              "/list",
+                              arguments: {
+                                "status": "Working",
+                                "userId": _userId,
+                              },
+                            );
+                          },
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.symmetric(horizontal: 8),
+                            minimumSize: Size.zero,
+                            backgroundColor: Colors.lightBlue,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.zero),
+                            ),
+                          ),
+                          child: Column(
+                            children: [
+                              const Text(
+                                "In Progress",
+                                style: TextStyle(fontWeight: FontWeight.w600),
+                              ),
+                              Text(
+                                "${_carServiceStatusCount["Working"]}",
+                                style: TextStyle(
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsetsGeometry.symmetric(horizontal: 8),
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pushNamed(
+                              "/list",
+                              arguments: {
+                                "status": "Finished",
+                                "userId": _userId,
+                              },
+                            );
+                          },
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.symmetric(horizontal: 8),
+                            minimumSize: Size.zero,
+                            backgroundColor: Colors.lightGreen,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.zero),
+                            ),
+                          ),
+                          child: Column(
+                            children: [
+                              const Text(
+                                "Done",
+                                style: TextStyle(fontWeight: FontWeight.w600),
+                              ),
+                              Text(
+                                "${_carServiceStatusCount["Finished"]}",
+                                style: TextStyle(
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Text(
+                "Cars in Service",
+                style: TextStyle(fontSize: 32, fontWeight: FontWeight.w400),
+              ),
+              Expanded(
+                flex: 13,
+                child: Table(
+                  border: TableBorder.all(),
+                  columnWidths: {
+                    0: FlexColumnWidth(3),
+                    1: FlexColumnWidth(30),
+                    2: FlexColumnWidth(4),
+                  },
+                  children: _inProgressCarsRow,
+                ),
+              ),
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "Account",
+                style: TextStyle(fontSize: 32, fontWeight: FontWeight.w400),
+              ),
+              TextButton(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Not yet implemented")),
+                  );
                 },
-                children: _inProgressCarsRow,
+                child: const Text("View/Change Account Details"),
               ),
-            ),
-          ],
-        ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, "/login");
+                },
+                child: const Text("Log out"),
+              ),
+              const Text(
+                "Miscellaneous",
+                style: TextStyle(fontSize: 32, fontWeight: FontWeight.w400),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, "/about");
+                },
+                child: const Text("About Us"),
+              ),
+            ],
+          ),
+        ][_currentPageIndex],
+      ),
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: (int index) {
+          setState(() {
+            _currentPageIndex = index;
+          });
+        },
+        indicatorColor: Colors.lightBlue,
+        selectedIndex: _currentPageIndex,
+        destinations: const <Widget>[
+          NavigationDestination(icon: Icon(Icons.home), label: "Dashboard"),
+          NavigationDestination(icon: Icon(Icons.settings), label: "Settings"),
+        ],
       ),
     );
   }
@@ -253,9 +315,13 @@ class _DashboardPageState extends State<DashboardPage> {
                     child: Center(
                       child: TextButton(
                         onPressed: () {
-                          Navigator.of(
-                            context,
-                          ).pushNamed("/details", arguments: {"id": row["id"]});
+                          Navigator.of(context).pushNamed(
+                            "/details",
+                            arguments: <String, int?>{
+                              "serviceId": row["id"],
+                              "userId": _userId,
+                            },
+                          );
                         },
                         child: const Text("View"),
                       ),

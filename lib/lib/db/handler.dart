@@ -9,7 +9,7 @@ class DatabaseHandler {
   final String _password = "";
   final String _dbName = "bengkelan_db";
 
-  late final MysqlUtils? _db;
+  late MysqlUtils? _db;
   static final DatabaseHandler _handler = DatabaseHandler._();
 
   factory DatabaseHandler() {

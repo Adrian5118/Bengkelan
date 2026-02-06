@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   mysql_utils: ^2.1.12
   crypto: ^3.0.7
+  searchable_listview: ^2.19.4
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,7 @@
 import 'package:bengkelan/lib/db/handler.dart';
 import 'package:bengkelan/pages/dashboard.dart';
+import 'package:bengkelan/pages/details.dart';
+import 'package:bengkelan/pages/list.dart';
 import 'package:bengkelan/pages/login.dart';
 import 'package:bengkelan/pages/register.dart';
 import 'package:flutter/material.dart';
@@ -46,9 +48,24 @@ class MyApp extends StatelessWidget {
         "/login": (context) => const LoginPage(),
         "/register": (context) => const RegisterPage(),
         "/dashboard": (context) => const DashboardPage(),
-        "/details": (context) =>
-            Scaffold(appBar: AppBar(title: Text("Details"))),
-        "/list": (context) => Scaffold(appBar: AppBar(title: Text("List"))),
+        "/details": (context) => const DetailsPage(),
+        "/list": (context) => const ListPage(),
+        "/about": (context) => Scaffold(
+          // This is too simple to make its own page
+          appBar: AppBar(title: const Text("About")),
+          body: Center(
+            child: Column(
+              children: [
+                const Text(
+                  "Kelompok 1 TIF RP-23 CID B",
+                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.w400),
+                ),
+                const Text("Anggota:"),
+                const Text("Adrianto (23552011381)"),
+              ],
+            ),
+          ),
+        ),
       },
       initialRoute: "/login",
     );

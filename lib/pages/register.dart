@@ -331,6 +331,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 const Text("Password"),
                 Expanded(
                   child: TextFormField(
+                    obscureText: true,
                     controller: _passwordController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
