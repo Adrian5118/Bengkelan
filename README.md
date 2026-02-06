@@ -1,16 +1,28 @@
-# bengkelan
+# Bengkelan
 
-A new Flutter project.
+Aplikasi Bengkel khusus kustomer berbasis Flutter
 
-## Getting Started
+# Demo Video
+<iframe src="https://drive.google.com/file/d/1MZbyu3vv9H7W3qFlREyXk2wo6nLpYsPL/preview" width="640" height="480"></iframe>
 
-This project is a starting point for a Flutter application.
+# Tampilan
+## Register
+<iframe src="https://drive.google.com/file/d/1jwYzTBMy-86oll3Hl_7Ag9ms3Fgzg6C4/preview" width="640" height="480"></iframe>
 
-A few resources to get you started if this is your first Flutter project:
+## Login
+<iframe src="https://drive.google.com/file/d/158si79QX2ifWQCEY99159VmknPZcVauQ/preview" width="640" height="480"></iframe>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Dashboard
+<iframe src="https://drive.google.com/file/d/1pRDfqyo9ZNQMTm-qH5zXHtlzuRhsBY9P/preview" width="640" height="480"></iframe>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Settings
+<iframe src="https://drive.google.com/file/d/1SQqJQmka6GeHBskhfrYDL4SfAZ7DJfEG/preview" width="640" height="480"></iframe>
+
+## About Us
+<iframe src="https://drive.google.com/file/d/1f32dDakDeO377grlrauo1maNoLp7Sejd/preview" width="640" height="480"></iframe>
+
+## Listing dengan Fitur Search
+<iframe src="https://drive.google.com/file/d/1m6653Ex_v-qYs9_RX3YZCSEun5Ow3150/preview" width="640" height="480"></iframe>
+
+## Detail Listing
+<iframe src="https://drive.google.com/file/d/1u4czr_XsKxZnaVn9EQeEAREqjpA1Rxhk/preview" width="640" height="480"></iframe>
