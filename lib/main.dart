@@ -1,4 +1,5 @@
 import 'package:bengkelan/lib/db/handler.dart';
+import 'package:bengkelan/pages/dashboard.dart';
 import 'package:bengkelan/pages/login.dart';
 import 'package:bengkelan/pages/register.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,10 @@ class MyApp extends StatelessWidget {
       routes: {
         "/login": (context) => const LoginPage(),
         "/register": (context) => const RegisterPage(),
-        "/dashboard": (context) => const Placeholder(),
+        "/dashboard": (context) => const DashboardPage(),
+        "/details": (context) =>
+            Scaffold(appBar: AppBar(title: Text("Details"))),
+        "/list": (context) => Scaffold(appBar: AppBar(title: Text("List"))),
       },
       initialRoute: "/login",
     );
